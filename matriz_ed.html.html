@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Evaluación de competencias digitales - Gestión curricular</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+  h2 { color: #2a6ebb; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+  th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+  th { background-color: #2a6ebb; color: white; }
+  select { width: 100%; padding: 5px; }
+  .result { font-weight: bold; font-size: 1.1em; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<h2>Evaluación de competencias digitales desde el rol de gestión curricular</h2>
+
+<form id="evaluationForm">
+  <table>
+    <thead>
+      <tr>
+        <th>Dimensión</th>
+        <th>Indicador</th>
+        <th>Evaluación (0=Rojo, 1=Amarillo, 2=Verde)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Visión y liderazgo pedagógico digital</td>
+        <td>La escuela tiene un plan escrito que define el uso pedagógico de tecnologías digitales.</td>
+        <td>
+          <select name="liderazgo">
+            <option value="0">0 - No existe plan o no se conoce</option>
+            <option value="1">1 - Existe plan pero no se aplica ni revisa</option>
+            <option value="2">2 - Plan vigente, revisado y aplicado</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Planificación curricular</td>
+        <td>Se realizan reuniones interdisciplinarias para planificar actividades con tecnologías digitales.</td>
+        <td>
+          <select name="planificacion">
+            <option value="0">0 - No se realizan reuniones</option>
+            <option value="1">1 - Reuniones ocasionales</option>
+            <option value="2">2 - Reuniones sistemáticas con actas</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Formación y acompañamiento</td>
+        <td>Se brindan capacitaciones continuas en competencias digitales para docentes.</td>
+        <td>
+          <select name="formacion">
+            <option value="0">0 - No hay capacitaciones planificadas</option>
+            <option value="1">1 - Capacitaciones esporádicas</option>
+            <option value="2">2 - Capacitaciones regulares con seguimiento</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Infraestructura y accesibilidad</td>
+        <td>Todos los estudiantes y docentes tienen acceso adecuado a dispositivos y conectividad.</td>
+        <td>
+          <select name="infraestructura">
+            <option value="0">0 - Acceso limitado o desigual</option>
+            <option value="1">1 - Acceso parcial con dificultades</option>
+            <option value="2">2 - Acceso universal y soporte técnico</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Cultura institucional digital</td>
+        <td>Se promueven normas y prácticas de uso responsable y colaborativo de las TIC.</td>
+        <td>
+          <select name="cultura">
+            <option value="0">0 - No hay normas ni promoción activa</option>
+            <option value="1">1 - Normas poco conocidas o aplicadas</option>
+            <option value="2">2 - Normas claras y aplicadas en toda la comunidad</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Evaluación y mejora continua</td>
+        <td>Se recopilan datos para evaluar el impacto del uso de tecnologías en el aprendizaje.</td>
+        <td>
+          <select name="evaluacion">
+            <option value="0">0 - No se recopilan datos</option>
+            <option value="1">1 - Datos parciales y poco sistemáticos</option>
+            <option value="2">2 - Evaluación regular con ajustes</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Protección de derechos y ciudadanía digital</td>
+        <td>Se promueven prácticas y políticas sobre privacidad, seguridad y ética digital.</td>
+        <td>
+          <select name="proteccion">
+            <option value="0">0 - No se trabajan estos temas</option>
+            <option value="1">1 - Se trabajan puntualmente</option>
+            <option value="2">2 - Política clara con formación y seguimiento</option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button type="button" onclick="calcularPuntaje()">Calcular Puntaje</button>
+</form>
+
+<div class="result" id="resultado"></div>
+
+<script>
+  function calcularPuntaje() {
+    const form = document.getElementById('evaluationForm');
+    let total = 0;
+    const campos = ['liderazgo', 'planificacion', 'formacion', 'infraestructura', 'cultura', 'evaluacion', 'proteccion'];
+
+    campos.forEach(campo => {
+      const valor = parseInt(form[campo].value);
+      total += valor;
+    });
+
+    let nivel = '';
+    if (total <= 4) nivel = 'Situación inicial: Es necesario diseñar un plan integral para incorporar tecnologías digitales desde la gestión.';
+    else if (total <= 9) nivel = 'En desarrollo: Hay avances, pero se debe fortalecer la sistematización y consolidación de procesos.';
+    else nivel = 'Consolidado: La gestión digital está integrada con procesos claros, formación continua y cultura activa.';
+
+    document.getElementById('resultado').innerHTML = `Puntaje total: <strong>${total}</strong> de 14.<br><br><em>${nivel}</em>`;
+  }
+</script>
+
+</body>
+</html>
